@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.1
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: ousmane
+      POSTGRES_DB: student
+    ports:
+      - 5432:5432
+
+
+  pgadmin:
+    depends_on:
+      - postgres
+    container_name: pgadmin_c
+    image: dpage/pgadmin4:6
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ousmane@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: ousmane_password
+      PGADMIN_CONFIG_SERVER_MODE: "True"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+    ports:
+      - "5050:80"
+
+volumes:
+  pgadmin:
